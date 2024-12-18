@@ -17,6 +17,7 @@ Vagrant est un outil de gestion de machines virtuelles qui permet de définir, c
   ```
 
   Crée un fichier `Vagrantfile` pour une box spécifique.
+
 - **Lancement de la VM :**
 
   ```bash
@@ -24,6 +25,7 @@ Vagrant est un outil de gestion de machines virtuelles qui permet de définir, c
   ```
 
   Démarre et provisionne la machine virtuelle.
+
 - **Connexion SSH :**
 
   ```bash
@@ -31,6 +33,7 @@ Vagrant est un outil de gestion de machines virtuelles qui permet de définir, c
   ```
 
   Permet d'accéder à la VM via SSH.
+
 - **Arrêt de la VM :**
 
   ```bash
@@ -38,6 +41,7 @@ Vagrant est un outil de gestion de machines virtuelles qui permet de définir, c
   ```
 
   Arrête proprement la machine virtuelle.
+
 - **Suppression de la VM :**
 
   ```bash
@@ -96,6 +100,7 @@ config.vm.synced_folder "./data", "/vagrant_data"
   ```
 
   Affiche les boxes disponibles localement.
+
 - **Ajouter une nouvelle box :**
 
   ```bash
@@ -103,6 +108,7 @@ config.vm.synced_folder "./data", "/vagrant_data"
   ```
 
   Télécharge une box depuis Vagrant Cloud.
+
 - **Supprimer une box :**
 
   ```bash
@@ -131,6 +137,65 @@ config.vm.synced_folder "./data", "/vagrant_data"
 
 ---
 
+## Vagrantfile en détail
+
+### 1. `config.vm`
+
+Le bloc **`config.vm`** est utilisé pour configurer les paramètres généraux de la machine virtuelle (VM).
+
+#### Exemple :
+
+```ruby
+config.vm.box = "ubuntu/bionic64"  # Définit l'image de la VM
+config.vm.hostname = "my-vm"       # Définit le nom d'hôte de la VM
+config.vm.network "private_network", ip: "192.168.33.10"  # Configure le réseau privé
+config.vm.provider "virtualbox" do |vb|
+  vb.memory = "1024"               # Alloue 1 Go de RAM à la VM
+  vb.cpus = 2                      # Définit le nombre de CPU
+end
+```
+
+- **Ressources de la VM :** Permet de paramétrer la mémoire, les CPU, et d'autres ressources via le provider.
+- **Réseau :** Configure les types de réseaux (privé, public, NAT).
+
+---
+
+### 2. `config.ssh`
+
+Le bloc **`config.ssh`** permet de configurer les paramètres liés à SSH, notamment la manière de se connecter à la VM.
+
+#### Exemple :
+
+```ruby
+config.ssh.username = "vagrant"       # Définit le nom d'utilisateur SSH
+config.ssh.password = "vagrant"       # Définit le mot de passe SSH
+config.ssh.private_key_path = "~/.ssh/id_rsa"  # Définit le chemin de la clé privée
+config.ssh.insert_key = false         # Empêche Vagrant de remplacer la clé SSH par défaut
+```
+
+- **Modification de SSH :** Utilisé pour personnaliser les configurations SSH et ajuster le comportement par défaut.
+- **Utilisation des clés SSH :** Permet de définir des clés spécifiques pour accéder à la VM.
+
+---
+
+### 3. `config.vagrant`
+
+Le bloc **`config.vagrant`** permet de configurer les paramètres globaux de Vagrant, comme les plugins ou des options sensibles.
+
+#### Exemple :
+
+```ruby
+config.vagrant.plugins = ["vagrant-vbguest"]  # Charge le plugin vagrant-vbguest
+config.vagrant.host = :detect                 # Détecte automatiquement le système hôte
+config.vagrant.sensitive = true               # Active la gestion de paramètres sensibles
+```
+
+- **Plugins :** Active ou installe automatiquement les plugins nécessaires.
+- **Host :** Permet de détecter et ajuster les configurations en fonction du système hôte.
+- **Sensitive :** Marque certaines valeurs comme sensibles (ex : mots de passe) pour éviter qu’elles ne soient affichées.
+
+---
+
 ## Bonnes pratiques
 
 1. **Organisez votre projet :**
@@ -145,6 +210,7 @@ config.vm.synced_folder "./data", "/vagrant_data"
 
 2. **Versionnez vos configurations :**
    Utilisez Git pour tracer les modifications du `Vagrantfile`.
+
 3. **Automatisez :**
    Utilisez des outils comme Ansible ou des scripts pour gérer le provisioning.
 
