@@ -18,7 +18,7 @@ Il fonctionne comme un espace centralisé, similaire à [hackmd.io](https://hack
 
 Voici l'organisation actuelle du repository :
 
-\`\`\`plaintext
+```plaintext
 documentation-devops/
 │
 ├── TSSR/                    # Notes et ressources liées au TSSR
@@ -34,7 +34,7 @@ documentation-devops/
 │
 ├── README.md                # Ce fichier
 └── Vagrant.md               # Notes sur l'utilisation de Vagrant pour la virtualisation
-\`\`\`
+```
 
 ---
 
@@ -43,9 +43,9 @@ documentation-devops/
 ### 📖 **Consulter les notes**
 
 1. Clone le repository sur ta machine locale :
-   \`\`\`bash
+   ```bash
    git clone <https://github.com/ton-utilisateur/documentation-devops.git>
-   \`\`\`
+   ```
 2. Navigue dans les dossiers pour accéder aux notes.
 
 ---
@@ -59,7 +59,7 @@ Pour ajouter une nouvelle note, respecte l'organisation suivante :
 
 Exemple de fichier :
 
-\`\`\`markdown
+```markdown
 
 # Titre de la Note
 
@@ -75,7 +75,7 @@ Explication rapide du sujet.
 ## Références
 
 - [Lien vers une documentation officielle](https://example.com)
-\`\`\`
+```
 
 ---
 
